@@ -122,3 +122,39 @@ Since devices on a private network (like your home) use private IP addresses, th
 | **Uniqueness**        | Can be reused across multiple networks                        | Must be unique across the global internet                      |
 
 In summary, **private IP addresses** are used for local device communication within a network, and **public IP addresses** allow these devices to communicate with other networks and the broader internet through the use of routers and **NAT**.
+
+---------------------------------
+a **router** can have **two IP addresses** (or more) at the same time because it acts as a bridge between two networks: the **local network** (private) and the **external network** (public).
+
+Here's how it works:
+
+### **1. Private IP Address (LAN IP)**
+- The router assigns **private IP addresses** to devices on the **local network** (e.g., your laptop, smartphone, printer).
+- This private IP is used by devices to communicate with the router and with each other within the **Local Area Network (LAN)**.
+- Example: The router's **LAN IP address** might be `192.168.1.1`, and devices connected to the router could have private IPs like `192.168.1.2`, `192.168.1.3`, etc.
+
+### **2. Public IP Address (WAN IP)**
+- The router also has a **public IP address**, which is assigned by the **Internet Service Provider (ISP)**. This public IP is used for communication with the broader **internet**.
+- When devices on the local network (with private IPs) need to access the internet, the router uses **NAT (Network Address Translation)** to translate those private IP addresses into its public IP address.
+- Example: The router’s **public IP address** might be `203.0.113.5`.
+
+### **How it Works:**
+
+- **LAN Side (Private Network)**: Your devices (e.g., laptop, phone) have private IP addresses (`192.168.1.x`) and communicate with the router using its **private IP address** (`192.168.1.1`).
+- **WAN Side (Public Network)**: The router uses its **public IP address** (`203.0.113.5`) to communicate with the internet. Any requests to external websites or services are routed through this public IP.
+
+### **Example of Communication Flow:**
+1. **Your Laptop** (Private IP: `192.168.1.2`) sends a request to access **www.example.com**.
+2. **Router**:
+   - The router uses **NAT** to translate the private IP `192.168.1.2` to its **public IP** (`203.0.113.5`).
+   - The router forwards the request to the internet using its public IP.
+3. **Web Server** (**www.example.com**): The server responds to the router’s public IP (`203.0.113.5`).
+4. **Router**: The router receives the response, then forwards it to the appropriate device (your laptop at `192.168.1.2`), based on its **NAT table**.
+
+---
+
+### **Summary:**
+- **Private IP**: Used on the **LAN (local network)** side (e.g., `192.168.1.1`).
+- **Public IP**: Used on the **WAN (internet)** side (e.g., `203.0.113.5`).
+
+In essence, the router has both a private IP for managing local devices and a public IP for communicating with the internet, allowing it to bridge the gap between the private network and the global internet.
